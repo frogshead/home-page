@@ -1,0 +1,18 @@
+
+header{
+text-align: center;
+/*
+font-family: "museo-sans-rounded-n3";
+*/
+font-family: "Lucida Console", Courier, monospace;
+
+}
+
+footer{
+	padding: 30px;
+	text-align: center;
+}
+
+a:link, a-hover{
+	color:black;
+}
