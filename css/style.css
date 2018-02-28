@@ -20,12 +20,13 @@ h5{
     text-decoration: underline burlywood;
 }
 
-a{
+#experience a{
     outline: none;
     text-decoration: none;
     padding: 2px 1px 0;
     color: black;
-    text-align: left;
+    display: block;
+    text-align:right;
 }
 
 
