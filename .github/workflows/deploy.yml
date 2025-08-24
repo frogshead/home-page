@@ -24,6 +24,7 @@ jobs:
 
       - name: Deploy to server
         run: |
+
           # Copy HTML files directly
           scp *.html ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/
           
@@ -37,6 +38,7 @@ jobs:
           
           # Reload nginx (assuming mikko user has sudo rights for this specific command)
           ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo systemctl reload nginx"
+
 
       - name: Cleanup SSH key
         if: always()
