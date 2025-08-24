@@ -24,10 +24,21 @@ jobs:
 
       - name: Deploy to server
         run: |
-          # Create deployment directory structure
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo mkdir -p /var/www/html/css /var/www/html/images"
+
+          # Copy HTML files directly
+          scp *.html ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/
           
+          # Copy CSS files
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "mkdir -p /var/www/html/css"
+          scp css/*.css ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/css/
           
+          # Copy images
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "mkdir -p /var/www/html/images"
+          scp images/* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/images/
+          
+          # Reload nginx (assuming mikko user has sudo rights for this specific command)
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo systemctl reload nginx"
+
 
       - name: Cleanup SSH key
         if: always()
