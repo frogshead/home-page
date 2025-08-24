@@ -27,23 +27,7 @@ jobs:
           # Create deployment directory structure
           ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo mkdir -p /var/www/html/css /var/www/html/images"
           
-          # Copy HTML files
-          scp *.html ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo mv /tmp/*.html /var/www/html/"
           
-          # Copy CSS files
-          scp css/*.css ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo mv /tmp/*.css /var/www/html/css/"
-          
-          # Copy images
-          scp images/* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo mv /tmp/me.jpg /var/www/html/images/ 2>/dev/null || true"
-          
-          # Set proper permissions
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo chown -R www-data:www-data /var/www/html && sudo chmod -R 644 /var/www/html && sudo find /var/www/html -type d -exec chmod 755 {} \;"
-          
-          # Reload nginx
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo systemctl reload nginx"
 
       - name: Cleanup SSH key
         if: always()
