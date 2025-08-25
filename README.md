@@ -14,15 +14,6 @@ This site is automatically deployed to a Hetzner VM running nginx using GitHub A
 - **Target Path**: `/var/www/html/`
 - **Files Deployed**: HTML, CSS, and images only
 
-### Setup Requirements
-
-To enable automatic deployment, add these secrets in GitHub repository settings (Settings > Secrets and variables > Actions):
-
-```
-SSH_PRIVATE_KEY: Your SSH private key content
-SSH_HOST: xn--viitamki-5za.fi
-SSH_USERNAME: mikko
-```
 
 ### Deployment Process
 
