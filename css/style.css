@@ -11,7 +11,7 @@ background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
 
 li {
-    list-style:"-";
+    list-style:"▸";
 }
 
 
@@ -30,7 +30,13 @@ h5{
 }
 
 #experience p a{
-    text-align: left;
+    text-align: left !important;
+    display: inline;
+    padding: 0;
+}
+
+#experience p i a{
+    text-align: left !important;
     display: inline;
     padding: 0;
 }
