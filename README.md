@@ -67,6 +67,30 @@ The CV content includes:
 - Education and certifications
 - Contact information with social media links
 
+## 🔗 Git Hooks
+
+This repository includes shared Git hooks to maintain code quality and workflow consistency.
+
+### Pre-push Hook
+
+Prevents direct pushes to the `master` branch to enforce proper PR workflow.
+
+#### Installation
+
+To install the shared hooks locally:
+
+```bash
+# Install the pre-push hook
+cp hooks/pre-push .git/hooks/pre-push
+chmod +x .git/hooks/pre-push
+```
+
+#### What it does
+
+- Blocks direct pushes to `master` branch
+- Provides clear instructions for creating feature branches
+- Suggests proper workflow with pull requests
+
 ## 🤖 AI Assistance
 
 This CV has been updated with assistance from Claude Code, as indicated by the robot emoji (🤖) in the work experience section.

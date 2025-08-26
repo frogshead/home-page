@@ -1,0 +1,30 @@
+#!/bin/sh
+# Pre-push hook to prevent direct pushes to master branch
+
+protected_branch='master'
+current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+if [ $protected_branch = $current_branch ]; then
+    echo "==============================================="
+    echo "🚫 PUSH TO MASTER BRANCH BLOCKED!"
+    echo "==============================================="
+    echo "Direct pushes to the master branch are not allowed."
+    echo "Please use a feature branch and create a pull request."
+    echo ""
+    echo "Current branch: $current_branch"
+    echo "Protected branch: $protected_branch"
+    echo ""
+    echo "To create a feature branch:"
+    echo "  git checkout -b feature/your-feature-name"
+    echo "  git push origin feature/your-feature-name"
+    echo ""
+    echo "To merge your current changes:"
+    echo "  git checkout -b feature/current-changes"
+    echo "  git push origin feature/current-changes"
+    echo "  # Then create a PR on GitHub"
+    echo "==============================================="
+    exit 1
+fi
+
+echo "✅ Push to branch '$current_branch' allowed."
+exit 0
