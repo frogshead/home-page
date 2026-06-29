@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+{% block title %}Mikko Viitamäki – CV{% endblock %}
+{% block body_class %}cv-page{% endblock %}
+
+{% block content %}
+<!-- Bilingual toggle targets. Default = Finnish; #en flips to English (CSS only, no JS). -->
+<span id="fi" tabindex="-1" aria-hidden="true"></span>
+<span id="en" tabindex="-1" aria-hidden="true"></span>
+
+<nav class="lang-switch screen-only" aria-label="Language / Kieli">
+	<a href="#fi" class="lang-switch__link lang-switch__fi">FI</a>
+	<a href="#en" class="lang-switch__link lang-switch__en">EN</a>
+	<a href="{{ get_url(path='@/notes/_index.md') }}" class="lang-switch__notes">
+		<span class="fi" lang="fi">Muistiinpanot</span><span class="en" lang="en">Notes</span>
+	</a>
+</nav>
+
+<div class="cv">
+	<!-- ============================== SIDEBAR ============================== -->
+	<aside class="sidebar">
+		<div class="sidebar__photo polaroid">
+			<img src="{{ get_url(path='images/me.jpg') }}" alt="Mikko Viitamäki" width="240" height="240" />
+		</div>
+		<h1 class="sidebar__name">Mikko Viitamäki</h1>
+		<p class="sidebar__role">
+			<span class="fi" lang="fi">DevSecOps-tuoteomistaja &amp; testiautomaatioinsinööri</span>
+			<span class="en" lang="en">DevSecOps Product Owner &amp; Test Automation Engineer</span>
+		</p>
+
+		<div class="sidebar__bio">
+			<div class="fi" lang="fi">
+				<p>Kolmen tyttären isä.</p>
+				<p>Keskinkertainen koodaaja joka kerää kehitysalustoja sekä keskeneräisiä projekteja.</p>
+				<p>Ikämiestalentti.</p>
+			</div>
+			<div class="en" lang="en">
+				<p>Father of three.</p>
+				<p>Average coder who has a bunch of development boards, unfinished projects and a limited amount of time.</p>
+				<p>Senior football player.</p>
+			</div>
+		</div>
+
+		<ul class="contacts" aria-label="Contact">
+			<li><a href="mailto:{{ config.extra.email }}">{{ config.extra.email }}</a></li>
+			<li><a href="{{ config.extra.github }}" rel="me">github.com/frogshead</a></li>
+			<li><a href="{{ config.extra.mastodon }}" rel="me">techhub.social/@Minix</a></li>
+		</ul>
+
+		<div class="sidebar__langs">
+			<h2 class="sidebar__subhead">
+				<span class="fi" lang="fi">Kielitaito</span><span class="en" lang="en">Languages</span>
+			</h2>
+			<ul>
+				<li><span class="fi" lang="fi">Suomi [äidinkieli]</span><span class="en" lang="en">Finnish [native]</span></li>
+				<li><span class="fi" lang="fi">Englanti [hyvä]</span><span class="en" lang="en">English [good]</span></li>
+				<li><span class="fi" lang="fi">Ruotsi [perusteet]</span><span class="en" lang="en">Swedish [basics]</span></li>
+			</ul>
+		</div>
+	</aside>
+
+	<!-- ============================== MAIN ============================== -->
+	<main class="content">
+
+		<!-- ---------- Experience ---------- -->
+		<section class="section" aria-labelledby="experience-h">
+			<h2 class="section__title" id="experience-h">
+				<span class="fi" lang="fi">Työkokemus</span><span class="en" lang="en">Experience</span>
+			</h2>
+
+			<article class="entry">
+				<time class="entry__date" datetime="2019-08">8.2019 –</time>
+				<div class="entry__body">
+					<h3 class="entry__role">Test Automation Engineer / Product Owner
+						<span class="entry__org">Mitsubishi Logisnext Europe, Järvenpää</span>
+						<span class="ai-note" title="Edited with help of Claude.ai">🤖</span>
+					</h3>
+					<div class="fi" lang="fi">
+						<p><em><a href="https://rocla-agv.com/">Rocla AGV</a> valmistaa automaattisia ohjattuja ajoneuvoja (AGV) ja kehittää FleetController-ohjelmistoa fleetin hallintaan.</em></p>
+						<ul>
+							<li>DevSecOps-tiimin tuoteomistaja. Vastuualueena pilvi-infrastruktuuri (Azure), kehityspipelinet, DevOps-turvallisuuskäytännöt ja monitorointi.</li>
+							<li>Testiautomaatio, testikehykset, kehitys- ja julkaisutestaus ovat olennainen osa tiimimme vastuualueita.</li>
+							<li>AGV-kalustohallintaohjelmistojen ja automaatioratkaisujen kehitystyö varastojen ja tuotantolaitosten sisälogistiikkaautomatisoinnissa.</li>
+						</ul>
+					</div>
+					<div class="en" lang="en">
+						<p><em><a href="https://rocla-agv.com/">Rocla AGV</a> manufactures Automated Guided Vehicles (AGVs) and develops FleetController software for fleet management.</em></p>
+						<ul>
+							<li>Product owner of the DevSecOps team. Responsible for cloud infrastructure (Azure), development pipelines, DevOps security practices and monitoring.</li>
+							<li>Test automation, test frameworks, development and release testing are an integral part of our team's responsibilities.</li>
+							<li>Working with AGV fleet-management software and automation solutions for warehouse and manufacturing intralogistics automation.</li>
+						</ul>
+					</div>
+				</div>
+			</article>
+
+			<article class="entry">
+				<time class="entry__date" datetime="2013-02">4.2.2013 –</time>
+				<div class="entry__body">
+					<h3 class="entry__role">Senior Test Engineer
+						<span class="entry__org">Enics Oy, Vantaa/Lohja</span>
+					</h3>
+					<div class="fi" lang="fi">
+						<ul>
+							<li>Testaustiedonkeruujärjestelmän kehitys ja ylläpito. Ohjelmistosuunnittelu pääsääntöisesti Microsoftin tekniikoita käyttäen kuten .NET, ASP.NET, Entity Framework ja Reporting Services.</li>
+							<li>Mittalaiteajureiden kehitys (C# / .NET).</li>
+							<li>Funktionaalinen- sekä Boundary-Scan -testaussuunnittelu (NI TestStand, NI LabView, NI VisionBuilder, Göpel Cascon Galaxy).</li>
+						</ul>
+					</div>
+					<div class="en" lang="en">
+						<p>Software development for a test data collection system: storing and analysing electronics-manufacturing tests from in-house and third-party testers. Development mostly with Microsoft tools such as C#, .NET, ASP.NET, Entity Framework and Reporting Services.</p>
+						<ul>
+							<li>Instrument drivers (C# / .NET).</li>
+							<li>Functional and Boundary-Scan test development (NI TestStand, NI LabView, NI VisionBuilder, Göpel Cascon Galaxy).</li>
+						</ul>
+					</div>
+				</div>
+			</article>
+
+			<article class="entry">
+				<time class="entry__date" datetime="2004-11">22.11.2004 – 19.5.2012</time>
+				<div class="entry__body">
+					<h3 class="entry__role">Senior Test Engineer
+						<span class="entry__org">Tellabs, Espoo</span>
+					</h3>
+					<div class="fi" lang="fi">
+						<p>Tietoliikennelaitteiden proto- ja tuotantotestaussuunnittelu, vastuualueena Boundary Scan -testaussuunnittelu. Hyvä ymmärrys nykyaikaisesta elektroniikan ja tietoliikennelaitteiden tuotannontestauksesta sekä HW- että SW-tuotekehitysprosesseista.</p>
+					</div>
+					<div class="en" lang="en">
+						<p>Test software and test system development for Tellabs' telecommunication devices. Responsible for Boundary-Scan development including Design for Testability analysis, test software and hardware development, co-operation with contract manufacturers and maintenance of the test solutions.</p>
+					</div>
+				</div>
+			</article>
+
+			<article class="entry">
+				<time class="entry__date" datetime="2004-06">14.6.2004 – 19.11.2004</time>
+				<div class="entry__body">
+					<h3 class="entry__role">Test Engineer
+						<span class="entry__org">Tellabs, Espoo (Eilakaisla)</span>
+					</h3>
+					<div class="fi" lang="fi">
+						<p>Pilotti- ja prototuotteiden funktionaalinen sekä Boundary Scan -testaus. Mahdollisten vikojen paikallistaminen ja korjaaminen. Pienimuotoisesti myös testauslaitteiden ylläpitoa, kokoonpanoa sekä konfigurointia.</p>
+					</div>
+					<div class="en" lang="en">
+						<p>Functional and Boundary-Scan testing for prototypes of telecommunication boards. Failure diagnostics and repair, as well as test system maintenance, assembly and configuration.</p>
+					</div>
+				</div>
+			</article>
+
+			<article class="entry">
+				<time class="entry__date" datetime="2004-03">5.3.2004 – 11.6.2004</time>
+				<div class="entry__body">
+					<h3 class="entry__role">Test Engineer
+						<span class="entry__org">Elcoteq Tallinn / Espoo unit (Eilakaisla)</span>
+					</h3>
+					<div class="fi" lang="fi">
+						<p>Tietoliikennelaitteiden funktionaalinen testaus, vianhaku ja pintaliitoskomponenttien vaihtaminen.</p>
+					</div>
+					<div class="en" lang="en">
+						<p>Functional testing, failure diagnostics and replacing surface-mount components.</p>
+					</div>
+				</div>
+			</article>
+
+			<article class="entry">
+				<time class="entry__date" datetime="2003-05">26.5.2003 – 29.8.2003</time>
+				<div class="entry__body">
+					<h3 class="entry__role">Technical Documentation
+						<span class="entry__org">Steris Finn-Aqua, Tuusula</span>
+					</h3>
+					<div class="fi" lang="fi">
+						<p>Komponenttimanuaalien päivittäminen ja vieminen PDM (Product Data Management) -tietokantajärjestelmään. Uusien manuaalien suunnittelu ja toteutus.</p>
+					</div>
+					<div class="en" lang="en">
+						<p>Updating component manuals and exporting them into the Product Data Management database. Designing and deploying new manuals.</p>
+					</div>
+				</div>
+			</article>
+
+			<article class="entry">
+				<time class="entry__date" datetime="2000-05">2000 – 2002</time>
+				<div class="entry__body">
+					<h3 class="entry__role">Summer Trainee
+						<span class="entry__org">Matronic Oy, Tuusula</span>
+					</h3>
+					<div class="fi" lang="fi">
+						<p>17.6.–30.8.2002, 14.5.–31.8.2001, 17.5.–25.8.2000. Työskentely ESD- ja juotostekniikan tuotteiden parissa: mm. myynti, markkinointi, tilausten käsittely sekä yhteydenpito kotimaisiin ja ulkomaisiin päämiehiin ja asiakkaisiin. Tuotekoulutus sekä työhönohjaus.</p>
+					</div>
+					<div class="en" lang="en">
+						<p>Summers of 2000–2002. Worked with Electro Static Discharge products and soldering-technology products. As an all-rounder: order management, marketing and contact with local and international principals and clients, plus some product training.</p>
+					</div>
+				</div>
+			</article>
+
+			<article class="entry">
+				<time class="entry__date" datetime="1999-04">6.4. – 13.8.1999</time>
+				<div class="entry__body">
+					<h3 class="entry__role">Summer Trainee
+						<span class="entry__org">Tukospar Oy, Kerava</span>
+					</h3>
+					<div class="fi" lang="fi">
+						<p>Elintarvikkeiden varastointi ja keräily.</p>
+					</div>
+					<div class="en" lang="en">
+						<p>Warehousing and order picking in a grocery wholesale.</p>
+					</div>
+				</div>
+			</article>
+		</section>
+
+		<!-- ---------- Education ---------- -->
+		<section class="section" aria-labelledby="education-h">
+			<h2 class="section__title" id="education-h">
+				<span class="fi" lang="fi">Koulutus ja kurssit</span><span class="en" lang="en">Education &amp; courses</span>
+			</h2>
+			<div class="entry">
+				<div class="entry__body">
+					<p class="entry__role entry__role--degree">
+						<span class="fi" lang="fi"><em>1999–2005 Kymenlaakson Ammattikorkeakoulu — Elektroniikan insinööri (AMK), pääaineena elektroniikan tuotantotekniikka.</em></span>
+						<span class="en" lang="en"><em>1999–2005 Kymenlaakso University of Applied Sciences — B.Eng. in Electronics, major in electronics manufacturing technology.</em></span>
+					</p>
+					<ul class="courses">
+						<li><span class="fi" lang="fi">2017 Göpel partner days, Jena, Saksa</span><span class="en" lang="en">2017 Göpel partner days, Jena, Germany</span></li>
+						<li><span class="fi" lang="fi">2016 Göpelin Embedded JTAG Solutions -kurssi, Jena, Saksa</span><span class="en" lang="en">2016 Göpel's Embedded JTAG Solutions course, Jena, Germany</span></li>
+						<li><span class="fi" lang="fi">7–12/2002 IT Carlow, Irlanti, vaihto-opiskelu</span><span class="en" lang="en">7–12/2002 IT Carlow, Ireland, exchange student</span></li>
+						<li><span class="fi" lang="fi">2002 Käyttöohje- ja tekninen dokumentointi, Rastor Oy, Vantaa</span><span class="en" lang="en">2002 User manuals and technical documentation, Rastor Oy, Vantaa</span></li>
+						<li><span class="fi" lang="fi">1999 Aliupseerikoulu, Laskuvarjojääkärikoulu, Utti</span><span class="en" lang="en">1999 Military service (NCO / Parachute Jaeger school), Utti</span></li>
+						<li><span class="fi" lang="fi">1998 Ylioppilas, Hyrylän lukio</span><span class="en" lang="en">1998 Finnish Matriculation Examination, Hyrylä Upper Secondary School</span></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ---------- Tools ---------- -->
+		<section class="section" aria-labelledby="tools-h">
+			<h2 class="section__title" id="tools-h">
+				<span class="fi" lang="fi">Kehitystyökalut ja -ympäristöt</span><span class="en" lang="en">Tools &amp; environments</span>
+			</h2>
+			<div class="fi" lang="fi">
+				<p>Sujuva kaikissa tärkeimmissä käyttöjärjestelmissä mukaan lukien Windows, macOS ja Linux-jakelut. Kokemusta sulautetuista järjestelmistä ja Azure-pilvialustasta. Kokemusta tekoälyavusteisista teknologioista kuten Claude Code, Microsoft Copilot ja ChatGPT.</p>
+				<p>Kokemusta Boundary-Scan testausmenetelmästä, Göpelin Boundary-Scan kehitystyökaluista ja niihin liittyvistä standardeista kuten 1149.1.</p>
+			</div>
+			<div class="en" lang="en">
+				<p>Proficient with all major operating systems including Windows, macOS and Linux distributions. Experience with embedded systems and the Azure cloud platform. Experience with AI-assisting technologies including Claude Code, Microsoft Copilot and ChatGPT.</p>
+				<p>Proficient with the Boundary-Scan test method, Göpel's Boundary-Scan development tools and related standards such as 1149.1.</p>
+			</div>
+			<ul class="tags" aria-label="Tools">
+				<li>Visual Studio &amp; VS Code</li>
+				<li>Git</li>
+				<li>Jira · BitBucket · Confluence</li>
+				<li>Jenkins</li>
+				<li>Docker</li>
+				<li>Kubernetes</li>
+				<li>Terraform &amp; Bicep</li>
+				<li>Argo CD &amp; Workflows</li>
+				<li>Grafana · InfluxDB · Loki</li>
+				<li>Playwright &amp; Robot Framework</li>
+				<li>MS SQL Server &amp; Reporting Services</li>
+				<li>Göpel Cascon Galaxy</li>
+				<li>NI TestStand · CVI · LabView · VisionBuilder</li>
+			</ul>
+		</section>
+
+		<!-- ---------- Programming languages ---------- -->
+		<section class="section" aria-labelledby="langs-h">
+			<h2 class="section__title" id="langs-h">
+				<span class="fi" lang="fi">Ohjelmointikielet</span><span class="en" lang="en">Programming languages</span>
+			</h2>
+			<ul class="proglangs">
+				<li><code>C#</code>
+					<span class="fi" lang="fi">[kohtalainen] — .NET, ASP.NET, Entity Framework</span>
+					<span class="en" lang="en">[intermediate] — .NET, ASP.NET, Entity Framework</span></li>
+				<li><code>Python</code>
+					<span class="fi" lang="fi">[kohtalainen]</span><span class="en" lang="en">[intermediate]</span></li>
+				<li><code>Rust</code>
+					<span class="fi" lang="fi">[kohtalainen]</span><span class="en" lang="en">[intermediate]</span></li>
+				<li><code>SQL</code>
+					<span class="fi" lang="fi">[kohtalainen]</span><span class="en" lang="en">[intermediate]</span></li>
+				<li><code>C</code>
+					<span class="fi" lang="fi">[kohtalainen]</span><span class="en" lang="en">[intermediate]</span></li>
+				<li><code>Java</code>
+					<span class="fi" lang="fi">[perusteet]</span><span class="en" lang="en">[basics]</span></li>
+				<li><code>Pascal</code>
+					<span class="fi" lang="fi">[perusteet — Casconin sisäinen kieli Caslan pohjautui Pascaliin]</span>
+					<span class="en" lang="en">[basics — Cascon's internal language Caslan was based on Pascal]</span></li>
+				<li><code>HTML · CSS · JavaScript</code>
+					<span class="fi" lang="fi">[perusteet]</span><span class="en" lang="en">[basics]</span></li>
+			</ul>
+		</section>
+	</main>
+</div>
+{% endblock %}

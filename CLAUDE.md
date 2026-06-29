@@ -4,50 +4,70 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal CV/portfolio website for Mikko Viitamäki. It's a static HTML site with custom CSS styling, featuring a bilingual CV in Finnish and English.
+This is a personal CV/portfolio website for Mikko Viitamäki, plus a notes section.
+It is built with the [Zola](https://www.getzola.org/) static site generator. The
+*output* is lightweight static HTML/CSS with **no JavaScript** — the bilingual
+(Finnish/English) toggle and the print/PDF view are achieved with pure CSS.
 
 ## Architecture
 
-- **Static HTML Site**: Pure HTML/CSS with no build process or dependencies
-- **Bilingual Design**: Two main pages - `index.html` (Finnish) and `cv_en.html` (English)
-- **CSS Grid Layout**: Uses modern CSS Grid for responsive layout instead of frameworks
-- **FontAwesome Icons**: External CDN for social media icons
+- **Zola static site**: Markdown content + Tera templates compile to static HTML in `public/`.
+- **Single-page CV**: The CV is one page (`templates/index.html`) carrying **both**
+  languages inline. Zola's native i18n is intentionally **not** used, because the
+  redesign's bilingual toggle keeps both languages in the same rendered page.
+- **Notes section**: Standard Zola section under `content/notes/` (markdown posts).
+- **"Editorial Warm" design**: Two-column CSS Grid (sidebar + content) on desktop,
+  single column on mobile, with a dedicated print stylesheet.
 
 ### File Structure
 
-- `index.html` - Main Finnish CV page
-- `cv_en.html` - English CV page  
-- `css/style.css` - Custom CSS with grid layout and geometric background patterns
-- `images/me.jpg` - Profile photo
-- `css/FortAwesome-Font-Awesome-ee55c85/` - Local FontAwesome assets (appears unused, external CDN is used)
+- `config.toml` - Zola configuration (`base_url`, feeds, `[extra]` contact details)
+- `content/_index.md` - CV landing page; front matter selects `templates/index.html`
+- `content/notes/_index.md` + `content/notes/*.md` - Notes section index and posts
+- `templates/base.html` - Shared HTML shell (`<head>`, fonts, viewport)
+- `templates/index.html` - The bilingual CV (both `.fi`/`.en` nodes inline)
+- `templates/notes/section.html`, `templates/notes/page.html` - Notes templates
+- `static/css/style.css` - "Editorial Warm" stylesheet (screen + print)
+- `static/images/me.jpg` - Profile photo
+- `Dockerfile` - Zola build image for reproducible local/CI builds
+- `.github/workflows/deploy.yml` - GitHub Actions build + deploy workflow
 
 ## Key Design Patterns
 
-### CSS Grid Layout
-The site uses a 6-column CSS Grid layout defined in `.container`:
-- Header spans full width (columns 1-7)
-- Name displayed vertically in column 6
-- Contact info and photo in columns 1-3
-- Main content (experience, education, tools) in columns 3-6
+### Bilingual toggle (no JS)
+Both languages live in the markup. Every translatable node is duplicated with a
+`.fi` / `.en` class and a matching `lang` attribute. Finnish is the default
+(`.en { display: none }`); two anchor links (`#fi` / `#en`) flip visibility via
+`body:has(#en:target)` rules in `static/css/style.css`. Fallback (no `:has()`
+support) is Finnish-default.
 
-### Styling Approach
-- Custom geometric background pattern using CSS gradients
-- Polaroid-style profile photo with border radius and shadow
-- Consistent black borders with rounded corners for sections
-- FontAwesome icons for social media links
+### Layout
+- CSS Grid page shell: `.cv { grid-template-columns: 262px 1fr }` (sidebar + content).
+- Each experience/education item is an `<article class="entry">` with a `<time>`
+  date column and a body column (also a grid).
+- Sidebar is `position: sticky` on desktop; the layout collapses to one column
+  below 880px and the date/body split stacks below 480px. Fluid type via `clamp()`.
+- CSS custom properties (in `:root`) define the warm palette and spacing scale.
+
+### Print / PDF
+A `@media print` block sets A4 page size, hides screen-only chrome (`.screen-only`,
+e.g. the language switch), avoids breaking entries across pages (`break-inside: avoid`),
+and appends URLs to external content links.
 
 ## Development Notes
 
-- No build process, package manager, or dependencies
-- Files can be opened directly in browser for testing
-- Both HTML files share the same CSS file
-- Language switching via simple anchor links between pages
-- All external dependencies (FontAwesome) loaded via CDN
+- Build locally with `zola serve` (live reload at http://127.0.0.1:1111) or
+  `zola build` (output to `public/`). `public/` is git-ignored.
+- No-JS constraint is intentional — keep interactivity in CSS.
+- Fonts (Newsreader, Hanken Grotesk, JetBrains Mono) are loaded from Google Fonts
+  in `templates/base.html`.
+- Deployment: CI runs `zola build` and copies `public/` to the nginx VM
+  (`/var/www/html/`); see `.github/workflows/deploy.yml`.
 
 ## Content Sections
 
-Both CV pages contain:
-- Professional experience with detailed work history
+The CV contains:
+- Professional experience with detailed work history (reverse-chronological)
 - Education and certifications
-- Programming languages and tools
-- Contact information and social media links
+- Programming/IT tools (tag chips) and programming languages with proficiency
+- Contact information and social links (sidebar)

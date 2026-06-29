@@ -1,0 +1,24 @@
+# Zola configuration for viitamäki.fi
+# https://www.getzola.org/documentation/getting-started/configuration/
+
+# Production base URL (punycode for viitamäki.fi)
+base_url = "https://xn--viitamki-5za.fi"
+
+title = "Mikko Viitamäki"
+description = "CV and notes of Mikko Viitamäki"
+default_language = "fi"
+
+# We hand-write the CSS, so let Zola leave assets alone.
+compile_sass = false
+minify_html = false
+build_search_index = false
+
+# Generate a feed for the notes section.
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+[extra]
+# Contact details surfaced in templates.
+email = "mikko.viitamaki@gmail.com"
+github = "https://github.com/frogshead"
+mastodon = "https://techhub.social/@Minix"
