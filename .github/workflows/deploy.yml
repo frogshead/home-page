@@ -8,12 +8,23 @@ on:
 permissions:
   contents: read
 
+env:
+  ZOLA_VERSION: "0.22.1"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Install Zola
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola@${{ env.ZOLA_VERSION }}
+
+      - name: Build site
+        run: zola build
 
       - name: Setup SSH key
         run: |
@@ -24,21 +35,18 @@ jobs:
 
       - name: Deploy to server
         run: |
+          # Clear the web root, then copy the freshly generated static site.
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "mkdir -p /var/www/html && rm -rf /var/www/html/*"
+          scp -r public/* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/
 
-          # Copy HTML files directly
-          scp *.html ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/
-          
-          # Copy CSS files
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "mkdir -p /var/www/html/css"
-          scp css/*.css ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/css/
-          
-          # Copy images
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "mkdir -p /var/www/html/images"
-          scp images/* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/images/
-          
-          # Reload nginx (assuming mikko user has sudo rights for this specific command)
+          # Fix ownership and permissions.
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "\
+            sudo chown -R www-data:www-data /var/www/html && \
+            sudo find /var/www/html -type d -exec chmod 755 {} \; && \
+            sudo find /var/www/html -type f -exec chmod 644 {} \;"
+
+          # Reload nginx.
           ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo systemctl reload nginx"
-
 
       - name: Cleanup SSH key
         if: always()

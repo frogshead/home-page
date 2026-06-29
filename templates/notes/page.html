@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} – Mikko Viitamäki{% endblock %}
+{% block description %}{{ page.summary | default(value=config.description) | striptags | truncate(length=150) }}{% endblock %}
+{% block body_class %}note-page{% endblock %}
+
+{% block content %}
+<article class="notes note">
+	<a class="notes__back" href="{{ get_url(path='@/notes/_index.md') }}">← Notes</a>
+	{% if page.date %}<p class="note__meta"><time datetime="{{ page.date }}">{{ page.date | date(format="%-d.%-m.%Y") }}</time></p>{% endif %}
+	<h1 class="note__title">{{ page.title }}</h1>
+	{{ page.content | safe }}
+</article>
+{% endblock %}

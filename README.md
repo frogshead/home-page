@@ -1,30 +1,32 @@
 # Personal CV Website
 
-A bilingual (Finnish/English) CV website built with pure HTML/CSS featuring a modern CSS Grid layout.
+A bilingual (Finnish/English) CV plus a notes section, built with the
+[Zola](https://www.getzola.org/) static site generator. The "Editorial Warm"
+design ships as lightweight static HTML + CSS with **no JavaScript** — the
+language switch and print/PDF view are pure CSS.
 
 ## 🚀 Deployment
 
-This site is automatically deployed to a Hetzner VM running nginx using GitHub Actions whenever changes are merged to the `master` branch.
+The site is automatically built with Zola and deployed to a Hetzner VM running
+nginx using GitHub Actions whenever changes are merged to the `master` branch.
 
 ### Deployment Pipeline
 
 - **Trigger**: Automatic deployment on push to `master` branch or manual trigger
+- **Build**: `zola build` generates the static site into `public/`
 - **Platform**: Hetzner VM (xn--viitamki-5za.fi)
 - **Web Server**: nginx
 - **Target Path**: `/var/www/html/`
-- **Files Deployed**: HTML, CSS, and images only
-
 
 ### Deployment Process
 
 The workflow:
 1. Checks out the repository code
-2. Sets up SSH connection to the server
-3. Copies HTML files to `/var/www/html/`
-4. Copies CSS files to `/var/www/html/css/`
-5. Copies images to `/var/www/html/images/`
-6. Sets proper permissions (www-data:www-data, 644/755)
-7. Reloads nginx service
+2. Installs Zola and runs `zola build` to generate `public/`
+3. Sets up SSH connection to the server
+4. Clears the web root and copies the generated `public/` files
+5. Sets proper permissions (www-data:www-data, 644/755)
+6. Reloads nginx service
 
 ### Manual Deployment
 
@@ -32,30 +34,43 @@ The workflow can also be triggered manually from the GitHub Actions tab.
 
 ## 📁 Structure
 
-- `index.html` - Finnish CV page
-- `cv_en.html` - English CV page  
-- `css/style.css` - Custom CSS with Grid layout
-- `images/` - Profile photo and assets
-- `.github/workflows/deploy.yml` - GitHub Actions deployment workflow
+- `config.toml` - Zola configuration
+- `content/_index.md` - CV landing page (selects the CV template)
+- `content/notes/` - Markdown notes (section index + posts)
+- `templates/base.html` - Shared HTML shell (head, fonts)
+- `templates/index.html` - The bilingual CV (both languages inline, CSS toggle)
+- `templates/notes/` - Notes listing + single-note templates
+- `static/css/style.css` - "Editorial Warm" stylesheet (screen + print)
+- `static/images/` - Profile photo and assets
+- `Dockerfile` - Zola build image (reproducible local/CI builds)
+- `.github/workflows/deploy.yml` - GitHub Actions build + deploy workflow
 - `CLAUDE.md` - Documentation for Claude Code
 
 ## 🛠 Technologies
 
-- Pure HTML5/CSS3
-- CSS Grid for responsive layout
-- FontAwesome 5.15.4 for icons
-- No build process or dependencies required
+- [Zola](https://www.getzola.org/) static site generator (output is plain HTML/CSS)
+- CSS Grid + custom properties for the responsive "Editorial Warm" layout
+- Pure-CSS bilingual toggle (`:target` / `:has()`) and print stylesheet — no JS
+- Fonts: Newsreader, Hanken Grotesk, JetBrains Mono (Google Fonts)
 
 ## 🔧 Local Development
 
-Simply open the HTML files in a web browser:
+Install [Zola](https://www.getzola.org/documentation/getting-started/installation/)
+(`brew install zola`) and run the dev server with live reload:
 
 ```bash
-# Open Finnish version
-open index.html
+# Live preview at http://127.0.0.1:1111
+zola serve
 
-# Open English version  
-open cv_en.html
+# Produce the production build into ./public
+zola build
+```
+
+Or build with Docker (no local Zola needed):
+
+```bash
+docker build -t viitamaki-site .
+docker run --rm -v "$PWD/public:/site/public" viitamaki-site   # -> ./public
 ```
 
 ## 📝 Content Updates
