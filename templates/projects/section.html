@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Projects – Mikko Viitamäki{% endblock %}
+{% block body_class %}notes-page{% endblock %}
+
+{% block content %}
+<div class="notes">
+	<a class="notes__back" href="{{ get_url(path='/') }}">← CV</a>
+	<h1 class="notes__title">Projects</h1>
+
+	<div class="project-list">
+
+		<article class="project-card">
+			<a href="https://ratakierros.fi/" target="_blank" rel="noopener" class="project-card__thumb">
+				<img src="{{ get_url(path='images/projects/ratakierros.jpg') }}" alt="ratakierros.fi screenshot" width="1280" height="800" />
+			</a>
+			<div class="project-card__body">
+				<h2 class="project-card__name">
+					<a href="https://ratakierros.fi/" target="_blank" rel="noopener">ratakierros.fi</a>
+				</h2>
+				<p class="project-card__desc">Find the nearest athletics track near your location.</p>
+				<div class="project-card__links">
+					<a href="https://ratakierros.fi/" target="_blank" rel="noopener">↗ Live</a>
+					<a href="https://github.com/frogshead/ratakierros-fi" target="_blank" rel="noopener">↗ GitHub</a>
+				</div>
+			</div>
+		</article>
+
+		<article class="project-card">
+			<a href="https://arewegoneyet.viitamäki.fi/" target="_blank" rel="noopener" class="project-card__thumb">
+				<img src="{{ get_url(path='images/projects/arewegoneyet.jpg') }}" alt="arewegoneyet.viitamäki.fi screenshot" width="1280" height="800" />
+			</a>
+			<div class="project-card__body">
+				<h2 class="project-card__name">
+					<a href="https://arewegoneyet.viitamäki.fi/" target="_blank" rel="noopener">arewegoneyet.viitamäki.fi</a>
+				</h2>
+				<p class="project-card__desc">Are we gone yet? A simple status page.</p>
+				<div class="project-card__links">
+					<a href="https://arewegoneyet.viitamäki.fi/" target="_blank" rel="noopener">↗ Live</a>
+					<a href="https://github.com/frogshead/big-fat-internet-button" target="_blank" rel="noopener">↗ GitHub</a>
+				</div>
+			</div>
+		</article>
+
+		<article class="project-card">
+			<a href="https://chess.viitamäki.fi/" target="_blank" rel="noopener" class="project-card__thumb">
+				<img src="{{ get_url(path='images/projects/chess.jpg') }}" alt="chess.viitamäki.fi screenshot" width="1280" height="800" />
+			</a>
+			<div class="project-card__body">
+				<h2 class="project-card__name">
+					<a href="https://chess.viitamäki.fi/" target="_blank" rel="noopener">chess.viitamäki.fi</a>
+				</h2>
+				<p class="project-card__desc">Interactive chess knight random walk probability simulator — a problem from Skrolli magazine.</p>
+				<div class="project-card__links">
+					<a href="https://chess.viitamäki.fi/" target="_blank" rel="noopener">↗ Live</a>
+					<a href="https://github.com/frogshead/chess-skrolli-problem" target="_blank" rel="noopener">↗ GitHub</a>
+				</div>
+			</div>
+		</article>
+
+	</div>
+</div>
+{% endblock %}

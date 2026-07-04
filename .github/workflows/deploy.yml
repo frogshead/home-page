@@ -23,6 +23,18 @@ jobs:
         with:
           tool: zola@${{ env.ZOLA_VERSION }}
 
+      - name: Install screenshot dependencies
+        run: npm install
+        working-directory: scripts
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+        working-directory: scripts
+
+      - name: Capture project screenshots
+        run: node screenshot.mjs
+        working-directory: scripts
+
       - name: Build site
         run: zola build
 
