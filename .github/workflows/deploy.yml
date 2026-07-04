@@ -48,7 +48,7 @@ jobs:
       - name: Deploy to server
         run: |
           # Clear the web root, then copy the freshly generated static site.
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "mkdir -p /var/www/html && rm -rf /var/www/html/*"
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "mkdir -p /var/www/html && sudo rm -rf /var/www/html/*"
           scp -r public/* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/
 
           # Fix ownership and permissions.
