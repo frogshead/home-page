@@ -40,3 +40,7 @@ Temporary Items
 
 # Zola build output
 /public
+
+# Screenshot script dependencies
+/scripts/node_modules/
+/scripts/package-lock.json

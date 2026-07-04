@@ -500,6 +500,71 @@ body:has(#en:target) .lang-switch__en {
 }
 
 /* ============================================================
+   Projects section
+   ============================================================ */
+.project-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-5);
+}
+
+.project-card {
+	background: var(--surface);
+	border: 1px solid var(--line-strong);
+	border-radius: var(--radius);
+	overflow: hidden;
+}
+
+.project-card__thumb {
+	display: block;
+	line-height: 0;
+}
+
+.project-card__thumb img {
+	width: 100%;
+	height: 220px;
+	object-fit: cover;
+	object-position: top;
+	border-bottom: 1px solid var(--line);
+	transition: opacity 0.15s;
+}
+
+.project-card__thumb:hover img {
+	opacity: 0.88;
+}
+
+.project-card__body {
+	padding: var(--space-5);
+}
+
+.project-card__name {
+	font-family: var(--serif);
+	font-size: 1.4rem;
+	font-weight: 500;
+	margin-bottom: var(--space-2);
+}
+
+.project-card__name a {
+	color: var(--ink);
+}
+
+.project-card__name a:hover {
+	color: var(--accent);
+}
+
+.project-card__desc {
+	color: var(--ink-soft);
+	margin-bottom: var(--space-4);
+}
+
+.project-card__links {
+	display: flex;
+	gap: var(--space-4);
+	font-family: var(--mono);
+	font-size: 0.82rem;
+}
+
+/* ============================================================
    Responsive
    ============================================================ */
 @media (max-width: 880px) {
