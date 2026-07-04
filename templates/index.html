@@ -48,7 +48,7 @@
 			<li><a href="mailto:{{ config.extra.email }}">{{ config.extra.email }}</a></li>
 			<li><a href="{{ config.extra.github }}" rel="me">github.com/frogshead</a></li>
 			<li><a href="{{ config.extra.mastodon }}" rel="me">techhub.social/@Minix</a></li>
-			<li><a href="{{ get_url(path='notes/atom.xml', trailing_slash=false) }}" type="application/atom+xml">notes/atom.xml</a></li>
+			<li><a href="{{ get_url(path='notes/atom.xml', trailing_slash=false) }}" type="application/atom+xml" aria-label="Notes – Atom feed"><img src="{{ get_url(path='images/feed.svg') }}" alt="Feed" width="16" height="16" class="feed-icon" /></a></li>
 		</ul>
 
 		<div class="sidebar__langs">
