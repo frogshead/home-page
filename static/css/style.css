@@ -255,6 +255,11 @@ body:has(#en:target) .lang-switch__en {
 	word-break: break-word;
 }
 
+.contact-icon {
+	display: inline;
+	vertical-align: middle;
+}
+
 .sidebar__langs ul {
 	display: flex;
 	flex-direction: column;
